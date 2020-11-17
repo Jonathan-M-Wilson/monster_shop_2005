@@ -11,7 +11,7 @@ Rails.application.routes.draw do
   namespace :merchant do
     get "/", to: "dashboard#show"
     resources :items
-    match "/items/:id/update_status" => 'items#update_status', :via => :patch #I am curious what other uses match is used for....
+    match "/items/:id/update_status" => 'items#update_status', :via => :patch
     resources :orders, only: [:show]
     resources :item_orders, only: [:update]
   end
@@ -24,7 +24,6 @@ Rails.application.routes.draw do
     resources :reviews, only: [:new, :create]
   end
 
-  # Not really sure how to refactor routes that break the RESTful conventions, or if it would be worth it.
   post "/cart/:item_id", to: "cart#add_item"
   get "/cart", to: "cart#show"
   patch "/cart", to: "cart#increment_decrement"
@@ -48,7 +47,7 @@ Rails.application.routes.draw do
   delete "/logout", to: "sessions#destroy"
 
   # EDIT USER
-  resource :users, only: [:edit, :update] # "Resource" was something I found on stack overflow, and it worked where "resources" didnt. Are there any reasons not to use "resource?"
+  resource :users, only: [:edit, :update]
 
   # EDIT PASSWORD
   resource :passwords, only: [:edit, :update]
